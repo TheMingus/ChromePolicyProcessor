@@ -33,7 +33,7 @@ if opt == '0':
     value = ExtensionInstallAllowlist.get('value')
     results = []
     for extID in value:
-        result = search(f'{extID} chrome web store', num_results=1)
-        print(result)
+        search(f'{extID} chrome web store', num_results=1)
+        # print(result)
         results.append(result)
-        with open('results.json', 'w') as f: json.dump(results, f, indent=2)
+        # with open('results.json', 'w') as f: dump(results, f, indent=2)
