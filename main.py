@@ -11,17 +11,14 @@ print('''Quick Start/First Time Instructions:
 > Place the file in the policies directory.
 
 > If you would like to process more than one policy, place multiple files in the policies directory.''')
-policy = input('\nWhen the file is in place, press enter to continue...')
+policy = input('\nWhen the file is in place, press enter to continue... ')
 
-# if isfile('policies.json'):
-#     policy = 'policies.json'
-# elif not isfile('policies.json'):
-#     while not isfile(policy):
-#         print('File was not found in the script directory. Please input the policy file\'s path')
-#         policy = input('\n> ')
+if not listdir('policies'):
+    print('\nPolicies directory contains no files. Please add a policy file.')
+    quit()
 for i in listdir('policies'):
-    if '.json' != i[-5:]:
-        print(f'{i} is not a JSON file, please remove it.')
+    if '.json' != i[-5:] and i != '.gitignore':
+        print(f'\n{i} is not a JSON file, please remove it.')
         quit()
 
 print('Next, please select an option from the follwing list.\n')
@@ -32,19 +29,22 @@ opt = input('\n\u001b[31m> ')
 print('\u001b[0m')
 
 if opt == '0':
-    extensions = policy.get('chromePolicies').get('ExtensionInstallAllowlist').get('value')
-    results = {}
-    errors = []
-    for id in tqdm(extensions):
-        try:
-            url = urllib.request.urlopen(f'https://chrome.google.com/webstore/detail/{id}').geturl()
-            name = url.replace('https://chrome.google.com/webstore/detail/', '')
-            name = name.replace(f'/{id}', '')
-            name.replace('-', ' ')
-            results[id] = {'error': False, 'name': name, 'url': url}
-        except urllib.error.HTTPError:
-            results[id] = {'error': True}
-            errors.append(id)
-    # if isfile(f'results/{}'):
-    with open('results/extensions.json', 'w') as f: dump(results, f, indent=2)
-    print(f'{len(errors)} extensions were not found. These extensions are no longer on the Chrome Web Store, for various reasons.')
+    for i in listdir('policies'):
+        with open(f'policies/{i}', 'r') as f:
+            policy = load(f)
+        extensions = policy.get('chromePolicies').get('ExtensionInstallAllowlist').get('value')
+        results = {}
+        errors = []
+        for id in tqdm(extensions):
+            try:
+                url = urllib.request.urlopen(f'https://chrome.google.com/webstore/detail/{id}').geturl()
+                name = url.replace('https://chrome.google.com/webstore/detail/', '')
+                name = name.replace(f'/{id}', '')
+                name.replace('-', ' ')
+                results[id] = {'error': False, 'name': name, 'url': url}
+            except urllib.error.HTTPError:
+                results[id] = {'error': True}
+                errors.append(id)
+        # if isfile(f'results/{}'):
+        with open('results/extensions.json', 'w') as f: dump(results, f, indent=2)
+        print(f'{len(errors)} extensions were not found. These extensions are no longer on the Chrome Web Store, for various reasons.')
