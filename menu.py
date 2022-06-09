@@ -1,8 +1,8 @@
 from os import get_terminal_size
 
-# -- # Set menu items here! #--#
-# -- # Index: Option number #--#
-# -- # Key: Name of option #--#
+# -- #     Set menu items here!     #--#
+# -- #     Index: Option number     #--#
+# -- #      Key: Name of option     #--#
 # -- # Value: Description of option #--#
 
 menu = {
