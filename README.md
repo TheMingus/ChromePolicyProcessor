@@ -1,5 +1,4 @@
 # ChromePolicyProcessor
-
 ## A (somewhat) easy way to get info from a Chrome Policy File.
 
 ---
