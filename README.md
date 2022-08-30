@@ -5,8 +5,8 @@
 ---
 
 ## Features:
-- Supports multiple policy files (outputs results to seperate files)
-- Lists all extensions that can be installed, including names and URLs to said extensions.
+- Process multiple policy files (outputs results to seperate files)
+- Find all whitelisted extensions, including names and URLs to said extensions.
 
 ## To Do
 - [x] Speed up extension processing
