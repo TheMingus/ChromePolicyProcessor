@@ -10,5 +10,7 @@
 
 ## To Do
 - [x] Speed up extension processing
-- [ ] Save login wallpaper to file
-- [ ] Better support for multiple policy files
+- [x] Save login wallpaper to file
+- [x] Better support for multiple policy files
+- [ ] Create example policy file
+- [ ] Support interpreting more policies
