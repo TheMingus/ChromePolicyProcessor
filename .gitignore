@@ -350,5 +350,7 @@ MigrationBackup/
 .ionide/
 
 # Directories that contain the user's policy files
-results/
-policies/
+results/*
+policies/*
+!results
+!policies
